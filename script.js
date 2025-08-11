@@ -5,12 +5,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const gamesGrid = document.getElementById("gamesGrid");
     const searchInput = document.querySelector(".search-input");
 
-    // Открытие/закрытие мобильного меню
+    // Мобильное меню
     menuToggle.addEventListener("click", () => {
         nav.classList.toggle("active");
     });
 
-    // Фильтрация игр по категориям
+    // Вставка рекламных блоков после каждых 10 игр
+    function insertAds() {
+        // Удалим старые блоки рекламы
+        const oldAds = document.querySelectorAll('.ad-block');
+        oldAds.forEach(ad => ad.remove());
+
+        const cards = [...gamesGrid.querySelectorAll(".game-card")];
+        cards.forEach((card, index) => {
+            if ((index + 1) % 10 === 0 && index !== cards.length - 1) {
+                const ad = document.createElement('div');
+                ad.classList.add('ad-block');
+                ad.textContent = 'Реклама';
+                // Можно добавить iframe или другой рекламный скрипт внутрь ad
+                gamesGrid.insertBefore(ad, cards[index + 1]);
+            }
+        });
+    }
+
+    insertAds();
+
+    // Фильтрация игр по выбранному фильтру и поиску
     filterButtons.forEach(button => {
         button.addEventListener("click", e => {
             e.preventDefault();
@@ -18,34 +38,56 @@ document.addEventListener("DOMContentLoaded", () => {
             filterButtons.forEach(btn => btn.classList.remove("active"));
             button.classList.add("active");
 
-            const category = button.dataset.category;
-
-            filterGames(category, searchInput.value.trim());
+            filterGames(button.dataset.filter, searchInput.value.trim());
         });
     });
 
-    // Поиск по названию
     searchInput.addEventListener("input", () => {
         const activeButton = document.querySelector(".filter-button.active");
-        const category = activeButton ? activeButton.dataset.category : "all";
-        filterGames(category, searchInput.value.trim());
+        const filter = activeButton ? activeButton.dataset.filter : "all";
+        filterGames(filter, searchInput.value.trim());
     });
 
-    function filterGames(category, searchTerm) {
-        const cards = gamesGrid.querySelectorAll(".game-card");
+    function filterGames(filter, searchTerm) {
+        const cards = [...gamesGrid.querySelectorAll(".game-card")];
+        const searchLower = searchTerm.toLowerCase();
+
         cards.forEach(card => {
-            const cardCategory = card.dataset.category.toLowerCase();
-            const cardTitle = card.dataset.title.toLowerCase();
-            const searchLower = searchTerm.toLowerCase();
+            const title = card.dataset.title.toLowerCase();
+            const badge = card.querySelector(".game-badge");
+            const badgeText = badge ? badge.textContent.toLowerCase() : "";
+            const ratingElem = card.querySelector(".game-rating");
+            const rating = ratingElem ? parseFloat(ratingElem.textContent) : 0;
 
-            const categoryMatch = (category === "all") || (cardCategory === category.toLowerCase());
-            const searchMatch = cardTitle.includes(searchLower);
+            // Поиск по названию
+            const matchesSearch = title.includes(searchLower);
 
-            if (categoryMatch && searchMatch) {
-                card.style.display = "";
-            } else {
-                card.style.display = "none";
+            // Фильтр по типу
+            let matchesFilter = false;
+
+            switch (filter) {
+                case "all":
+                    matchesFilter = true;
+                    break;
+                case "popular":
+                    matchesFilter = badgeText.includes("хит");
+                    break;
+                case "new":
+                    matchesFilter = badgeText.includes("новинка");
+                    break;
+                case "top":
+                    matchesFilter = rating >= 4.7;
+                    break;
+                case "no-badge":
+                    matchesFilter = !badge;
+                    break;
+                default:
+                    matchesFilter = true;
             }
+
+            card.style.display = matchesFilter && matchesSearch ? "" : "none";
         });
+
+        insertAds(); // обновляем рекламу после фильтрации
     }
 });

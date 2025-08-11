@@ -19,14 +19,14 @@
     <!-- /Yandex.Metrika counter -->
 
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Игры на телефон | Скачать лучшие игры для Android</title>
-    <meta name="keywords"
-        content="игры на телефон, мобильные игры, лучшие игры на телефон, игры бесплатно, скачать игры" />
+    <meta name="keywords" content="игры на телефон, мобильные игры, лучшие игры на телефон, игры бесплатно, скачать игры" />
     <meta name="description"
         content="Скачивайте лучшие мобильные игры на телефон бесплатно. У нас вы найдете самые популярные игры для телефона, скачать игры легко и быстро." />
+
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -37,12 +37,13 @@
                 <span>игры-на-телефон.рф</span>
             </div>
             <nav class="nav">
-                <a href="#" class="filter-button active" data-category="all"><i class="fas fa-list"></i> Все</a>
-                <a href="#" class="filter-button" data-category="Аркада"><i class="fas fa-gamepad"></i> Аркады</a>
-                <a href="#" class="filter-button" data-category="Гонки"><i class="fas fa-car"></i> Гонки</a>
-                <a href="#" class="filter-button" data-category="RPG"><i class="fas fa-dragon"></i> RPG</a>
+                <a href="#" class="filter-button active" data-filter="all"><i class="fas fa-list"></i> Все</a>
+                <a href="#" class="filter-button" data-filter="popular"><i class="fas fa-fire"></i> Популярные</a>
+                <a href="#" class="filter-button" data-filter="new"><i class="fas fa-star"></i> Новинки</a>
+                <a href="#" class="filter-button" data-filter="top"><i class="fas fa-trophy"></i> Топ 100</a>
+                <a href="#" class="filter-button" data-filter="no-badge"><i class="fas fa-tag"></i> Без бирки</a>
             </nav>
-            <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+            <button class="menu-toggle" aria-label="Меню"><i class="fas fa-bars"></i></button>
         </header>
 
         <!-- Поиск -->
@@ -50,8 +51,8 @@
             <h1 class="hero-title">Лучшие мобильные игры</h1>
             <p class="hero-subtitle">Находите и скачивайте редкие и новые игры</p>
             <div class="search-box">
-                <input type="text" placeholder="Найти игру..." class="search-input" />
-                <button class="search-button"><i class="fas fa-search"></i></button>
+                <input type="text" placeholder="Найти игру..." class="search-input" aria-label="Поиск игр" />
+                <button class="search-button" aria-label="Поиск"><i class="fas fa-search"></i></button>
             </div>
         </section>
 
@@ -60,12 +61,16 @@
             <section class="popular-games">
                 <h2 class="section-title"><i class="fas fa-crown"></i> Список игр</h2>
                 <div class="games-grid" id="gamesGrid">
-                    <!-- Примеры карточек -->
 
-                    <div class="game-card" data-category="Аркада" data-title="NeonGlide">
-                        <div class="game-badge Новинка">Новинка</div>
+                    <!-- Пример карточки с описанием и иконкой info -->
+                    <div class="game-card" data-category="Аркада" data-title="NeonGlide" data-description="Яркая аркадная игра с неоновыми трассами.">
+                        <div class="game-badge">Новинка</div>
                         <div class="game-image-container">
                             <img src="images/neon-glide.jpg" alt="NeonGlide - аркадная игра" class="game-image" loading="lazy" />
+                            <div class="info-icon" tabindex="0" aria-label="Описание игры NeonGlide">
+                                <i class="fas fa-info-circle"></i>
+                                <span class="tooltip">Яркая аркадная игра с неоновыми трассами.</span>
+                            </div>
                         </div>
                         <div class="game-content">
                             <h3 class="game-title">NeonGlide</h3>
@@ -73,14 +78,18 @@
                                 <span class="game-rating"><i class="fas fa-star"></i> 4.8</span>
                                 <span class="game-category">Аркада</span>
                             </div>
-                            <a href="https://play.google.com/store/apps/details?id=com.SecretplaceGames.NeonGlide" class="download-button" target="_blank">Скачать <i class="fas fa-arrow-down"></i></a>
+                            <a href="https://play.google.com/store/apps/details?id=com.SecretplaceGames.NeonGlide" class="download-button" target="_blank" rel="noopener noreferrer">Скачать <i class="fas fa-arrow-down"></i></a>
                         </div>
                     </div>
 
-                    <div class="game-card" data-category="Гонки" data-title="Speed Rush">
-                        <div class="game-badge Хит">Хит</div>
+                    <div class="game-card" data-category="Гонки" data-title="Speed Rush" data-description="Захватывающие гонки на высоких скоростях.">
+                        <div class="game-badge">Хит</div>
                         <div class="game-image-container">
                             <img src="images/speed-rush.jpg" alt="Speed Rush - гоночная игра" class="game-image" loading="lazy" />
+                            <div class="info-icon" tabindex="0" aria-label="Описание игры Speed Rush">
+                                <i class="fas fa-info-circle"></i>
+                                <span class="tooltip">Захватывающие гонки на высоких скоростях.</span>
+                            </div>
                         </div>
                         <div class="game-content">
                             <h3 class="game-title">Speed Rush</h3>
@@ -92,10 +101,14 @@
                         </div>
                     </div>
 
-                    <div class="game-card" data-category="RPG" data-title="Dragon Quest">
-                        <div class="game-badge RPG">RPG</div>
+                    <div class="game-card" data-category="RPG" data-title="Dragon Quest" data-description="Эпическая RPG с множеством квестов и персонажей.">
+                        <div class="game-badge">RPG</div>
                         <div class="game-image-container">
                             <img src="images/dragon-quest.jpg" alt="Dragon Quest - RPG игра" class="game-image" loading="lazy" />
+                            <div class="info-icon" tabindex="0" aria-label="Описание игры Dragon Quest">
+                                <i class="fas fa-info-circle"></i>
+                                <span class="tooltip">Эпическая RPG с множеством квестов и персонажей.</span>
+                            </div>
                         </div>
                         <div class="game-content">
                             <h3 class="game-title">Dragon Quest</h3>
@@ -107,10 +120,14 @@
                         </div>
                     </div>
 
-                    <div class="game-card" data-category="Аркада" data-title="Pixel Runner">
-                        <div class="game-badge Новинка">Новинка</div>
+                    <div class="game-card" data-category="Аркада" data-title="Pixel Runner" data-description="Весёлая аркада с пиксельной графикой и динамичным геймплеем.">
+                        <div class="game-badge">Новинка</div>
                         <div class="game-image-container">
                             <img src="images/pixel-runner.jpg" alt="Pixel Runner - аркадная игра" class="game-image" loading="lazy" />
+                            <div class="info-icon" tabindex="0" aria-label="Описание игры Pixel Runner">
+                                <i class="fas fa-info-circle"></i>
+                                <span class="tooltip">Весёлая аркада с пиксельной графикой и динамичным геймплеем.</span>
+                            </div>
                         </div>
                         <div class="game-content">
                             <h3 class="game-title">Pixel Runner</h3>
@@ -122,67 +139,8 @@
                         </div>
                     </div>
 
-                    <!-- Дополнительные карточки для рекламы -->
+                    <!-- Добавь больше карточек здесь -->
 
-                    <div class="game-card" data-category="Аркада" data-title="Sky Runner">
-                        <div class="game-badge Новинка">Новинка</div>
-                        <div class="game-image-container">
-                            <img src="images/sky-runner.jpg" alt="Sky Runner - аркада" class="game-image" loading="lazy" />
-                        </div>
-                        <div class="game-content">
-                            <h3 class="game-title">Sky Runner</h3>
-                            <div class="game-meta">
-                                <span class="game-rating"><i class="fas fa-star"></i> 4.7</span>
-                                <span class="game-category">Аркада</span>
-                            </div>
-                            <a href="#" class="download-button">Скачать <i class="fas fa-arrow-down"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="game-card" data-category="Гонки" data-title="Turbo Drift">
-                        <div class="game-badge Хит">Хит</div>
-                        <div class="game-image-container">
-                            <img src="images/turbo-drift.jpg" alt="Turbo Drift - гонки" class="game-image" loading="lazy" />
-                        </div>
-                        <div class="game-content">
-                            <h3 class="game-title">Turbo Drift</h3>
-                            <div class="game-meta">
-                                <span class="game-rating"><i class="fas fa-star"></i> 4.4</span>
-                                <span class="game-category">Гонки</span>
-                            </div>
-                            <a href="#" class="download-button">Скачать <i class="fas fa-arrow-down"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="game-card" data-category="RPG" data-title="Magic Realm">
-                        <div class="game-badge RPG">RPG</div>
-                        <div class="game-image-container">
-                            <img src="images/magic-realm.jpg" alt="Magic Realm - RPG" class="game-image" loading="lazy" />
-                        </div>
-                        <div class="game-content">
-                            <h3 class="game-title">Magic Realm</h3>
-                            <div class="game-meta">
-                                <span class="game-rating"><i class="fas fa-star"></i> 4.9</span>
-                                <span class="game-category">RPG</span>
-                            </div>
-                            <a href="#" class="download-button">Скачать <i class="fas fa-arrow-down"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="game-card" data-category="Аркада" data-title="Bubble Pop">
-                        <div class="game-badge Новинка">Новинка</div>
-                        <div class="game-image-container">
-                            <img src="images/bubble-pop.jpg" alt="Bubble Pop - аркада" class="game-image" loading="lazy" />
-                        </div>
-                        <div class="game-content">
-                            <h3 class="game-title">Bubble Pop</h3>
-                            <div class="game-meta">
-                                <span class="game-rating"><i class="fas fa-star"></i> 4.3</span>
-                                <span class="game-category">Аркада</span>
-                            </div>
-                            <a href="#" class="download-button">Скачать <i class="fas fa-arrow-down"></i></a>
-                        </div>
-                    </div>
                 </div>
             </section>
         </main>
@@ -192,8 +150,8 @@
             <div class="footer-content">
                 <p>© 2025 игры-на-телефон.рф</p>
                 <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link" aria-label="Вконтакте"><i class="fab fa-vk"></i></a>
+                    <a href="#" class="social-link" aria-label="Телеграм"><i class="fab fa-telegram"></i></a>
                 </div>
             </div>
         </footer>
