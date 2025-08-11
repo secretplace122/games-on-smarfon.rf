@@ -40,3 +40,29 @@ filterButtons.forEach(button => {
         console.log(`Фильтр: ${button.textContent}`);
     });
 });
+
+// Добавьте этот код в конец файла script.js
+document.querySelectorAll('.game-card').forEach(card => {
+    // Отключаем всплытие событий от бейджа
+    const badge = card.querySelector('.game-badge');
+    if (badge) {
+        badge.addEventListener('mouseenter', (e) => {
+            e.stopPropagation();
+        });
+    }
+    
+    // Правильное поведение при наведении на карточку
+    card.addEventListener('mouseenter', () => {
+        const imgContainer = card.querySelector('.game-image-container');
+        if (imgContainer) {
+            imgContainer.classList.add('hover');
+        }
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        const imgContainer = card.querySelector('.game-image-container');
+        if (imgContainer) {
+            imgContainer.classList.remove('hover');
+        }
+    });
+});

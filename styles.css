@@ -134,6 +134,7 @@ body {
 }
 
 .game-card {
+    position: relative; /* Добавляем для позиционирования бейджа */
     background-color: var(--white);
     border-radius: 10px;
     overflow: hidden;
@@ -141,9 +142,10 @@ body {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
+/* Убираем эффект наведения для самой карточки, переносим его на изображение */
 .game-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transform: none;
+    box-shadow: var(--box-shadow);
 }
 
 .game-badge {
@@ -156,13 +158,23 @@ body {
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 600;
+    z-index: 2; /* Добавляем z-index чтобы бейдж был выше изображения */
+    pointer-events: none; /* Отключаем взаимодействие с бейджем */
 }
 
+/* Эффект наведения только для изображения */
+.game-image-container:hover .game-image {
+    transform: scale(1.05);
+}
+
+/* Обновленный контейнер изображения */
 .game-image-container {
     position: relative;
     width: 100%;
-    padding-top: 100%; /* Это создаст квадратный контейнер */
+    padding-top: 100%;
     overflow: hidden;
+    border-radius: 10px 10px 0 0;
+    cursor: pointer;
 }
 
 .game-image {
