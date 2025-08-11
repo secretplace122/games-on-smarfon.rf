@@ -25,7 +25,8 @@
     <meta name="description"
         content="Скачивайте лучшие мобильные игры на телефон бесплатно. У нас вы найдете самые популярные игры для телефона, скачать игры легко и быстро." />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        crossorigin="anonymous" />
 </head>
 
 <body>
@@ -59,24 +60,60 @@
             <section class="popular-games">
                 <h2 class="section-title"><i class="fas fa-crown"></i> Список игр</h2>
                 <div class="games-grid" id="gamesGrid">
-                    <!-- Карточка с бейджем Новинка -->
-                    <div class="game-card" data-title="NeonGlide">
+                    <!-- Neon Glide -->
+                    <div class="game-card" data-title="Neon Glide">
                         <div class="game-badge new">Новинка</div>
                         <div class="game-image-container">
                             <img src="images/neon-glide.jpg" alt="NeonGlide - аркадная игра" class="game-image"
                                 loading="lazy" />
                             <div class="info-icon" tabindex="0">
                                 <i class="fas fa-info-circle"></i>
-                                <div class="tooltip">Неоновая аркада с крутым геймплеем и яркой графикой.</div>
+                                <div class="tooltip">Это простой, но залипательный аркадный таймкиллер в стиле "поп-ит":
+                                    ты водишь пальцем по экрану, ломаешь тайлы, собираешь бонусы и уворачиваешься от
+                                    ловушек.</div>
                             </div>
                         </div>
                         <div class="game-content">
-                            <h3 class="game-title">NeonGlide</h3>
+                            <h3 class="game-title">Neon Glide</h3>
                             <div class="game-meta">
-                                <span class="game-rating"><i class="fas fa-star"></i> 4.8</span>
+                                <span class="game-rating"><i class="fas fa-star"></i> 0</span>
+                                <span class="game-genre">Аркада</span>
                             </div>
-                            <a href="https://play.google.com/store/apps/details?id=com.SecretplaceGames.NeonGlide"
-                                class="download-button" target="_blank">Скачать <i class="fas fa-arrow-down"></i></a>
+                            <div class="game-footer">
+                                <a href="https://play.google.com/store/apps/details?id=com.SecretplaceGames.NeonGlide"
+                                    class="download-button" target="_blank">Скачать <i
+                                        class="fas fa-arrow-down"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Resource Rush -->
+                    <div class="game-card" data-title="Resource Rush">
+                        <div class="game-badge new">Новинка</div>
+                        <div class="game-image-container">
+                            <img src="images/Resource-Rush.jpg" alt="Resource_Rush - аркадная игра" class="game-image"
+                                loading="lazy" />
+                            <div class="info-icon" tabindex="0">
+                                <i class="fas fa-info-circle"></i>
+                                <div class="tooltip">Resource Rush - Ваш Ключ к Невероятным Приключениям и Добыче
+                                    Ресурсов!
+                                    Приготовьтесь к удивительным
+                                    путешествиям в мире Resource Rush, где ваша ловкость и стратегия становятся вашими
+                                    основными инструментами.</div>
+                            </div>
+                        </div>
+                        <div class="game-content">
+                            <h3 class="game-title">Resource Rush</h3>
+                            <div class="game-meta">
+                                <span class="game-rating"><i class="fas fa-star"></i> 0</span>
+                                <span class="game-genre">Стратегии</span>
+                            </div>
+                            <div class="game-footer">
+                                <a href="https://play.google.com/store/apps/details?id=com.RobTurGames.ResourceRush"
+                                    class="download-button" target="_blank">Скачать <i
+                                        class="fas fa-arrow-down"></i></a>
+                            </div>
+
                         </div>
                     </div>
 
@@ -119,33 +156,10 @@
                             <a href="#" class="download-button">Скачать <i class="fas fa-arrow-down"></i></a>
                         </div>
                     </div>
-
-                    <!-- Карточка без бейджа -->
-                    <div class="game-card" data-title="Pixel Runner">
-                        <div class="game-image-container">
-                            <img src="images/pixel-runner.jpg" alt="Pixel Runner - аркадная игра" class="game-image"
-                                loading="lazy" />
-                            <div class="info-icon" tabindex="0">
-                                <i class="fas fa-info-circle"></i>
-                                <div class="tooltip">Классический раннер с пиксельной графикой и динамичным геймплеем.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="game-content">
-                            <h3 class="game-title">Pixel Runner</h3>
-                            <div class="game-meta">
-                                <span class="game-rating"><i class="fas fa-star"></i> 4.5</span>
-                            </div>
-                            <a href="#" class="download-button">Скачать <i class="fas fa-arrow-down"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Добавь сюда больше карточек по примеру выше -->
                 </div>
             </section>
         </main>
 
-        <!-- Футер -->
         <footer class="footer">
             <div class="footer-content">
                 <p>© 2025 игры-на-телефон.рф</p>
