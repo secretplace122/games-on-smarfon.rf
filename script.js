@@ -9,7 +9,6 @@ genreButtons.forEach(button => {
     button.addEventListener('click', () => {
         genreButtons.forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
-        // Здесь будет код фильтрации игр
     });
 });
 
