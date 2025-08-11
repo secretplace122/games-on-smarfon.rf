@@ -286,3 +286,39 @@ body {
         grid-template-columns: 1fr;
     }
 }
+/* Мобильное меню */
+.nav {
+    display: flex;
+    gap: 20px;
+}
+.nav.active {
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    z-index: 10;
+}
+
+.filter-button {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+.filter-button.active {
+    color: var(--primary);
+}
+
+/* Исправляем на мобильных */
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+    }
+    .nav.active {
+        display: flex;
+    }
+}

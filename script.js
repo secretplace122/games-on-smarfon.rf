@@ -4,65 +4,39 @@ const nav = document.querySelector('.nav');
 
 menuToggle.addEventListener('click', () => {
     nav.classList.toggle('active');
-    
-    if (nav.classList.contains('active')) {
-        menuToggle.innerHTML = '<i class="fas fa-times"></i>';
-    } else {
-        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-    }
+    menuToggle.innerHTML = nav.classList.contains('active')
+        ? '<i class="fas fa-times"></i>'
+        : '<i class="fas fa-bars"></i>';
 });
 
-// Плавная прокрутка
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
+// Поиск игр
+const searchInput = document.querySelector('.search-input');
+const gameCards = document.querySelectorAll('.game-card');
+
+searchInput.addEventListener('input', () => {
+    const searchText = searchInput.value.toLowerCase();
+    gameCards.forEach(card => {
+        const title = card.dataset.title.toLowerCase();
+        card.style.display = title.includes(searchText) ? 'block' : 'none';
     });
 });
 
-// Фильтрация игр (заглушка для будущей реализации)
+// Фильтрация по жанрам
 const filterButtons = document.querySelectorAll('.filter-button');
 filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', e => {
+        e.preventDefault();
+        const category = button.dataset.category;
+        
         filterButtons.forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
-        
-        // Здесь будет логика фильтрации
-        console.log(`Фильтр: ${button.textContent}`);
-    });
-});
 
-// Добавьте этот код в конец файла script.js
-document.querySelectorAll('.game-card').forEach(card => {
-    // Отключаем всплытие событий от бейджа
-    const badge = card.querySelector('.game-badge');
-    if (badge) {
-        badge.addEventListener('mouseenter', (e) => {
-            e.stopPropagation();
+        gameCards.forEach(card => {
+            if (category === 'all' || card.dataset.category === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
         });
-    }
-    
-    // Правильное поведение при наведении на карточку
-    card.addEventListener('mouseenter', () => {
-        const imgContainer = card.querySelector('.game-image-container');
-        if (imgContainer) {
-            imgContainer.classList.add('hover');
-        }
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        const imgContainer = card.querySelector('.game-image-container');
-        if (imgContainer) {
-            imgContainer.classList.remove('hover');
-        }
     });
 });
