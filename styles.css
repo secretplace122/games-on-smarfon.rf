@@ -158,10 +158,25 @@ body {
     font-weight: 600;
 }
 
-.game-image {
+.game-image-container {
+    position: relative;
     width: 100%;
-    height: 150px;
-    object-fit: cover;
+    padding-top: 100%; /* Это создаст квадратный контейнер */
+    overflow: hidden;
+}
+
+.game-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Обрезает изображение, сохраняя пропорции */
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover .game-image {
+    transform: scale(1.05); /* Легкий эффект увеличения при наведении */
 }
 
 .game-content {
