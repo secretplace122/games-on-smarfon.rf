@@ -1,0 +1,72 @@
+/* Глобальные стили */
+:root {
+    --primary: #6e00ff;
+    --secondary: #ff00e6;
+    --dark: #1a1a2e;
+    --light: #f8f9fa;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #0f0f1a;
+    color: white;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Неоновый текст */
+.neon-text {
+    color: #fff;
+    text-shadow: 
+        0 0 5px var(--primary),
+        0 0 10px var(--primary),
+        0 0 20px var(--primary);
+}
+
+/* Шапка */
+header {
+    background: rgba(10, 10, 20, 0.9);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* Карточки игр */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.game-card {
+    background: rgba(30, 30, 50, 0.7);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    position: relative;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(110, 0, 255, 0.4);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .games-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+}

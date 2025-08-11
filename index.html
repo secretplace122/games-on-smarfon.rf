@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ТОП игры на телефон | Бесплатные хиты 2024</title>
+    <meta name="description" content="Скачать лучшие игры на Android и iOS бесплатно. Рейтинги, обзоры, новинки.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка с меню -->
+    <header>
+        <div class="logo">
+            <span class="neon-text">игры-на-телефон.рф</span>
+        </div>
+        <nav>
+            <a href="#arcade"><i class="fas fa-gamepad"></i> Аркады</a>
+            <a href="#racing"><i class="fas fa-car"></i> Гонки</a>
+            <a href="#rpg"><i class="fas fa-dragon"></i> RPG</a>
+            <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+        </nav>
+    </header>
+
+    <!-- Баннер с поиском -->
+    <section class="search-banner">
+        <h1>Найди свою идеальную игру</h1>
+        <div class="search-box">
+            <input type="text" placeholder="Например: NeonGlide">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </section>
+
+    <!-- Рекламный блок Яндекса -->
+    <div class="ad-block">
+        <div id="yandex_ads"></div>
+    </div>
+
+    <!-- Основной контент -->
+    <main>
+        <!-- Популярные игры -->
+        <section class="popular">
+            <h2><i class="fas fa-fire"></i> Популярные сейчас</h2>
+            <div class="games-grid">
+                <!-- Карточка игры (пример) -->
+                <div class="game-card">
+                    <div class="game-badge">Хит</div>
+                    <img src="images/neon-glide.jpg" alt="NeonGlide" class="game-image">
+                    <div class="game-info">
+                        <h3>NeonGlide</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i> 4.8
+                        </div>
+                        <p>Неоновая аркада в стиле 80-х</p>
+                        <a href="https://play.google.com/store/apps/details?id=com.SecretplaceGames.NeonGlide" class="download-btn">Скачать <i class="fas fa-download"></i></a>
+                    </div>
+                </div>
+                <!-- Еще 5-7 популярных игр -->
+            </div>
+        </section>
+
+        <!-- Жанры -->
+        <section id="genres">
+            <h2><i class="fas fa-filter"></i> Жанры</h2>
+            <div class="genre-tabs">
+                <button class="active">Все</button>
+                <button>Аркады</button>
+                <button>Гонки</button>
+                <button>RPG</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
+            <p>© 2024 игры-на-телефон.рф</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-vk"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <!-- Yandex.RTB -->
+    <script>
+        window.yaContextCb = window.yaContextCb || []
+    </script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
+</body>
+</html>
