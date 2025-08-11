@@ -1,93 +1,207 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+    const gamesGrid = document.getElementById("gamesGrid");
+    const filterButtons = document.querySelectorAll(".filter-button");
+    const searchInput = document.querySelector(".search-input");
     const menuToggle = document.querySelector(".menu-toggle");
     const nav = document.querySelector(".nav");
-    const filterButtons = document.querySelectorAll(".filter-button");
-    const gamesGrid = document.getElementById("gamesGrid");
-    const searchInput = document.querySelector(".search-input");
 
-    // Мобильное меню
-    menuToggle.addEventListener("click", () => {
-        nav.classList.toggle("active");
-    });
 
-    // Вставка рекламных блоков после каждых 10 игр
     function insertAds() {
-        // Удалим старые блоки рекламы
-        const oldAds = document.querySelectorAll('.ad-block');
+        const oldAds = document.querySelectorAll(".ad-block");
         oldAds.forEach(ad => ad.remove());
 
-        const cards = [...gamesGrid.querySelectorAll(".game-card")];
-        cards.forEach((card, index) => {
-            if ((index + 1) % 10 === 0 && index !== cards.length - 1) {
-                const ad = document.createElement('div');
-                ad.classList.add('ad-block');
-                ad.textContent = 'Реклама';
-                // Можно добавить iframe или другой рекламный скрипт внутрь ad
-                gamesGrid.insertBefore(ad, cards[index + 1]);
-            }
-        });
+        const visibleGames = Array.from(gamesGrid.querySelectorAll(".game-card:not(.hidden)"));
+
+        for (let i = 10; i < visibleGames.length; i += 10) {
+            const ad = document.createElement("div");
+            ad.className = "ad-block";
+            ad.textContent = "Реклама";
+            visibleGames[i - 1].after(ad);
+        }
     }
 
-    insertAds();
+    function filterGames(filter) {
+        const allCards = gamesGrid.querySelectorAll(".game-card");
+        const filterLower = filter.toLowerCase();
+        const noResults = document.getElementById('noResults');
 
-    // Фильтрация игр по выбранному фильтру и поиску
+        // Удаляем сообщение "Игры не найдены" при любом фильтре
+        if (noResults) {
+            noResults.remove();
+        }
+
+        allCards.forEach(card => {
+            const badgeEl = card.querySelector(".game-badge");
+            const hasClassNew = badgeEl && badgeEl.classList.contains("new");
+            const hasClassPopular = badgeEl && badgeEl.classList.contains("popular");
+            const hasClassTop100 = badgeEl && badgeEl.classList.contains("top100");
+
+            let matchesFilter = false;
+
+            if (filterLower === "all") {
+                matchesFilter = true;
+            } else if (filterLower === "popular") {
+                matchesFilter = hasClassPopular;
+            } else if (filterLower === "new") {
+                matchesFilter = hasClassNew;
+            } else if (filterLower === "top100") {
+                matchesFilter = hasClassTop100;
+            }
+
+            card.classList.toggle("hidden", !matchesFilter);
+        });
+
+        insertAds();
+    }
+
+    function searchGames(query) {
+        const q = query.trim().toLowerCase();
+        const allCards = gamesGrid.querySelectorAll(".game-card");
+        const noResults = document.getElementById('noResults');
+
+        // Удаляем старое сообщение перед новым поиском
+        if (noResults) {
+            noResults.remove();
+        }
+
+        if (q.length === 0) {
+            filterGames("all");
+            return;
+        }
+
+        let hasVisibleCards = false;
+
+        allCards.forEach(card => {
+            const title = card.dataset.title.toLowerCase();
+            if (title.includes(q)) {
+                card.classList.remove("hidden");
+                hasVisibleCards = true;
+            } else {
+                card.classList.add("hidden");
+            }
+        });
+
+        if (!hasVisibleCards) {
+            const message = document.createElement('div');
+            message.id = 'noResults';
+            message.textContent = 'Игры не найдены. Попробуйте другой запрос.';
+            gamesGrid.appendChild(message);
+        }
+
+        insertAds();
+    }
+
     filterButtons.forEach(button => {
         button.addEventListener("click", e => {
             e.preventDefault();
+            const filter = button.dataset.filter.toLowerCase();
 
             filterButtons.forEach(btn => btn.classList.remove("active"));
             button.classList.add("active");
 
-            filterGames(button.dataset.filter, searchInput.value.trim());
-        });
-    });
+            searchInput.value = "";
+            filterGames(filter);
 
-    searchInput.addEventListener("input", () => {
-        const activeButton = document.querySelector(".filter-button.active");
-        const filter = activeButton ? activeButton.dataset.filter : "all";
-        filterGames(filter, searchInput.value.trim());
-    });
-
-    function filterGames(filter, searchTerm) {
-        const cards = [...gamesGrid.querySelectorAll(".game-card")];
-        const searchLower = searchTerm.toLowerCase();
-
-        cards.forEach(card => {
-            const title = card.dataset.title.toLowerCase();
-            const badge = card.querySelector(".game-badge");
-            const badgeText = badge ? badge.textContent.toLowerCase() : "";
-            const ratingElem = card.querySelector(".game-rating");
-            const rating = ratingElem ? parseFloat(ratingElem.textContent) : 0;
-
-            // Поиск по названию
-            const matchesSearch = title.includes(searchLower);
-
-            // Фильтр по типу
-            let matchesFilter = false;
-
-            switch (filter) {
-                case "all":
-                    matchesFilter = true;
-                    break;
-                case "popular":
-                    matchesFilter = badgeText.includes("хит");
-                    break;
-                case "new":
-                    matchesFilter = badgeText.includes("новинка");
-                    break;
-                case "top":
-                    matchesFilter = rating >= 4.7;
-                    break;
-                case "no-badge":
-                    matchesFilter = !badge;
-                    break;
-                default:
-                    matchesFilter = true;
+            if (nav.classList.contains("active")) {
+                nav.classList.remove("active");
             }
+        });
+    });
 
-            card.style.display = matchesFilter && matchesSearch ? "" : "none";
+    searchInput.addEventListener("input", e => {
+        const query = e.target.value;
+
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+
+        if (query.length === 0) {
+            filterGames("all");
+            filterButtons.forEach(btn => {
+                if (btn.dataset.filter.toLowerCase() === "all") btn.classList.add("active");
+            });
+        } else {
+            searchGames(query);
+        }
+    });
+
+    menuToggle.addEventListener("click", () => {
+        nav.classList.toggle("active");
+    });
+
+    filterGames("all");
+    document.querySelectorAll('.info-icon').forEach(icon => {
+        icon.addEventListener('mouseenter', () => {
+            const tooltip = icon.querySelector('.tooltip');
+            if (tooltip) {
+                tooltip.style.opacity = '1';
+                tooltip.style.transform = 'translateY(0)';
+            }
         });
 
-        insertAds(); // обновляем рекламу после фильтрации
-    }
+        icon.addEventListener('mouseleave', () => {
+            const tooltip = icon.querySelector('.tooltip');
+            if (tooltip) {
+                tooltip.style.opacity = '0';
+                tooltip.style.transform = 'translateY(5px)';
+            }
+        });
+    });
+    document.querySelectorAll('.info-icon').forEach(icon => {
+        icon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const tooltip = icon.querySelector('.tooltip');
+            if (tooltip) {
+                const isVisible = tooltip.style.opacity === '1';
+                tooltip.style.opacity = isVisible ? '0' : '1';
+                tooltip.style.transform = isVisible ? 'translateY(5px)' : 'translateY(0)';
+            }
+        });
+    });
+
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.tooltip').forEach(tooltip => {
+            tooltip.style.opacity = '0';
+            tooltip.style.transform = 'translateY(5px)';
+        });
+    });
+
+    document.querySelectorAll('.info-icon').forEach(icon => {
+        // Для десктопов
+        icon.addEventListener('mouseenter', () => {
+            const tooltip = icon.querySelector('.tooltip');
+            if (tooltip) {
+                tooltip.style.opacity = '1';
+                tooltip.style.transform = 'translateY(0)';
+            }
+        });
+
+        icon.addEventListener('mouseleave', () => {
+            const tooltip = icon.querySelector('.tooltip');
+            if (tooltip) {
+                tooltip.style.opacity = '0';
+                tooltip.style.transform = 'translateY(5px)';
+            }
+        });
+
+        // Для мобильных устройств
+        icon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const tooltip = icon.querySelector('.tooltip');
+            if (tooltip) {
+                const isVisible = tooltip.style.opacity === '1';
+                tooltip.style.opacity = isVisible ? '0' : '1';
+                tooltip.style.transform = isVisible ? 'translateY(5px)' : 'translateY(0)';
+            }
+        });
+    });
+
+    // Закрытие подсказок при клике вне их
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.info-icon')) {
+            document.querySelectorAll('.tooltip').forEach(tooltip => {
+                tooltip.style.opacity = '0';
+                tooltip.style.transform = 'translateY(5px)';
+            });
+        }
+    });
 });
