@@ -1,23 +1,42 @@
 // Мобильное меню
-document.querySelector('.menu-toggle').addEventListener('click', () => {
-    document.querySelector('nav').classList.toggle('active');
-});
+const menuToggle = document.querySelector('.menu-toggle');
+const nav = document.querySelector('.nav');
 
-// Фильтр по жанрам
-const genreButtons = document.querySelectorAll('.genre-tabs button');
-genreButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        genreButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-    });
+menuToggle.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    
+    if (nav.classList.contains('active')) {
+        menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+    } else {
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+    }
 });
 
 // Плавная прокрутка
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Фильтрация игр (заглушка для будущей реализации)
+const filterButtons = document.querySelectorAll('.filter-button');
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        // Здесь будет логика фильтрации
+        console.log(`Фильтр: ${button.textContent}`);
     });
 });

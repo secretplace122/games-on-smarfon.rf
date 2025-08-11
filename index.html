@@ -2,126 +2,71 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>ТОП игры на телефон | Бесплатные хиты 2024</title>
-    <meta name="description" content="Скачать лучшие игры на Android и iOS бесплатно. Рейтинги, обзоры, новинки.">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лучшие игры на телефон | ТОП бесплатных игр 2024</title>
+    <meta name="description" content="Скачать лучшие игры для Android и iOS бесплатно. Новинки, рейтинги и обзоры игр.">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "игры-на-телефон.рф",
-        "url": "https://игры-на-телефон.рф"
-    }
-    </script>
 </head>
 <body>
-    <!-- Шапка -->
-    <header>
-        <div class="logo">
-            <span class="neon-text">игры-на-телефон.рф</span>
-        </div>
-        <nav>
-            <a href="#arcade"><i class="fas fa-gamepad"></i> Аркады</a>
-            <a href="#racing"><i class="fas fa-car"></i> Гонки</a>
-            <a href="#rpg"><i class="fas fa-dragon"></i> RPG</a>
-            <button class="menu-toggle"><i class="fas fa-bars"></i></button>
-        </nav>
-    </header>
+    <div class="container">
+        <!-- Шапка -->
+        <header class="header">
+            <div class="logo">
+                <span>игры-на-телефон.рф</span>
+            </div>
+            <nav class="nav">
+                <a href="#arcade" class="nav-link"><i class="fas fa-gamepad"></i> Аркады</a>
+                <a href="#racing" class="nav-link"><i class="fas fa-car"></i> Гонки</a>
+                <a href="#rpg" class="nav-link"><i class="fas fa-dragon"></i> RPG</a>
+                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+            </nav>
+        </header>
 
-    <!-- Баннер с поиском -->
-    <section class="search-banner">
-        <h1>Найди свою идеальную игру</h1>
-        <div class="search-box">
-            <input type="text" placeholder="Например: NeonGlide">
-            <button><i class="fas fa-search"></i></button>
-        </div>
-    </section>
-
-    <!-- Реклама Яндекса (ПК) -->
-    <div class="ad-block pc-only">
-        <div id="yandex_rtb_R-A-16687317-1"></div>
-    </div>
-
-    <!-- Реклама Яндекса (Мобильная) -->
-    <div class="ad-block mobile-only">
-        <div id="yandex_rtb_R-A-16687317-2"></div>
-    </div>
-
-    <!-- Основной контент -->
-    <main>
-        <section class="popular">
-            <h2><i class="fas fa-fire"></i> Популярные сейчас</h2>
-            <div class="games-grid">
-                <div class="game-card">
-                    <div class="game-badge">Хит</div>
-                    <img src="images/neon-glide.jpg" alt="NeonGlide" loading="lazy">
-                    <div class="game-info">
-                        <h3>NeonGlide</h3>
-                        <div class="rating">
-                            <i class="fas fa-star"></i> 4.8
-                        </div>
-                        <p>Неоновая аркада в стиле 80-х</p>
-                        <a href="https://play.google.com/store/apps/details?id=com.SecretplaceGames.NeonGlide" class="download-btn">Скачать <i class="fas fa-download"></i></a>
-                    </div>
+        <!-- Основной контент -->
+        <main class="main-content">
+            <section class="hero">
+                <h1 class="hero-title">Лучшие игры для вашего телефона</h1>
+                <p class="hero-subtitle">Откройте для себя новые миры в кармане</p>
+                <div class="search-box">
+                    <input type="text" placeholder="Найти игру..." class="search-input">
+                    <button class="search-button"><i class="fas fa-search"></i></button>
                 </div>
-                <!-- Другие игры -->
-            </div>
-        </section>
+            </section>
 
-        <section id="genres">
-            <h2><i class="fas fa-filter"></i> Жанры</h2>
-            <div class="genre-tabs">
-                <button class="active">Все</button>
-                <button>Аркады</button>
-                <button>Гонки</button>
-                <button>RPG</button>
-            </div>
-        </section>
-    </main>
+            <!-- Популярные игры -->
+            <section class="popular-games">
+                <h2 class="section-title"><i class="fas fa-crown"></i> Популярные сейчас</h2>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-badge">Выбор редакции</div>
+                        <img src="images/neon-glide.jpg" alt="NeonGlide" class="game-image" loading="lazy">
+                        <div class="game-content">
+                            <h3 class="game-title">NeonGlide</h3>
+                            <div class="game-meta">
+                                <span class="game-rating"><i class="fas fa-star"></i> 4.8</span>
+                                <span class="game-category">Аркада</span>
+                            </div>
+                            <a href="#" class="download-button">Скачать <i class="fas fa-arrow-down"></i></a>
+                        </div>
+                    </div>
+                    <!-- Другие карточки игр -->
+                </div>
+            </section>
+        </main>
 
-    <!-- Футер -->
-    <footer>
-        <div class="footer-content">
-            <p>© 2024 игры-на-телефон.рф</p>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-vk"></i></a>
-                <a href="#"><i class="fab fa-telegram"></i></a>
+        <!-- Футер -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>© 2024 игры-на-телефон.рф</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
-    <!-- Скрипты -->
     <script src="script.js"></script>
-    
-    <!-- Yandex.RTB -->
-    <script>window.yaContextCb=window.yaContextCb||[]</script>
-    <script src="https://yandex.ru/ads/system/context.js" async></script>
-    
-    <!-- Реклама для ПК -->
-    <script>
-    window.yaContextCb.push(() => {
-        Ya.Context.AdvManager.render({
-            renderTo: 'yandex_rtb_R-A-16687317-1',
-            blockId: 'R-A-16687317-1',
-            type: 'fullscreen',
-            platform: 'desktop'
-        })
-    })
-    </script>
-    
-    <!-- Реклама для мобильных -->
-    <script>
-    window.yaContextCb.push(() => {
-        Ya.Context.AdvManager.render({
-            renderTo: 'yandex_rtb_R-A-16687317-2',
-            blockId: 'R-A-16687317-2',
-            type: 'fullscreen',
-            platform: 'touch'
-        })
-    })
-    </script>
 </body>
 </html>
