@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Вставка рекламы
     function insertAds() {
         document.querySelectorAll(".ad-block").forEach(ad => ad.remove());
-        const visibleGames = Array.from(gamesGrid.querySelectorAll(".game-card:not(.hidden)"));
+        const visibleGames = Array.from(gamesGrid.querySelectorAll(".game-item:not(.hidden)"));
         
         for (let i = 10; i < visibleGames.length; i += 10) {
             const ad = document.createElement("div");
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Фильтрация игр
     function filterGames(filter) {
-        const allCards = gamesGrid.querySelectorAll(".game-card");
+        const allCards = gamesGrid.querySelectorAll(".game-item");
         const filterLower = filter.toLowerCase();
         document.getElementById('noResults')?.remove();
 
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Поиск игр
     function searchGames(query) {
         const q = query.trim().toLowerCase();
-        const allCards = gamesGrid.querySelectorAll(".game-card");
+        const allCards = gamesGrid.querySelectorAll(".game-item");
         document.getElementById('noResults')?.remove();
 
         if (!q) {
@@ -65,33 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         insertAds();
-    }
-
-    // Инициализация tooltips
-    function initTooltips() {
-        document.querySelectorAll('.info-icon').forEach(icon => {
-            // Десктопы
-            icon.addEventListener('mouseenter', () => {
-                icon.classList.add('active');
-            });
-            icon.addEventListener('mouseleave', () => {
-                icon.classList.remove('active');
-            });
-            
-            // Мобильные
-            icon.addEventListener('click', (e) => {
-                e.stopPropagation();
-                icon.classList.toggle('active');
-            });
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.info-icon')) {
-                document.querySelectorAll('.info-icon').forEach(icon => {
-                    icon.classList.remove('active');
-                });
-            }
-        });
     }
 
     // Обработчики событий
@@ -126,5 +99,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Инициализация
     filterGames("all");
-    initTooltips();
 });
