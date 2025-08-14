@@ -80,7 +80,7 @@ body {
     color: var(--text);
     text-decoration: none;
     font-weight: 500;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .filter-button.active {
@@ -164,7 +164,7 @@ body {
     font-weight: 600;
     color: white;
     z-index: 2;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .game-badge.new {
@@ -250,7 +250,7 @@ body {
     text-overflow: ellipsis;
     line-height: 1.4;
     max-height: 2.8em;
-    
+
     /* Современный способ с line-clamp */
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -323,7 +323,7 @@ body {
 .footer {
     background: var(--white);
     padding: 20px 0;
-    border-top: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .footer-content {
@@ -378,6 +378,7 @@ body {
 .game-card.hidden {
     display: none !important;
 }
+
 /* Добавьте в styles.css */
 .game-card.search-hidden {
     display: none !important;
@@ -389,4 +390,70 @@ body {
     padding: 20px;
     color: var(--text-light);
     font-size: 1rem;
+}
+
+/* Carousel Styles */
+.carousel-section {
+    padding: 20px 0;
+    overflow: hidden;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    margin: 0 -15px;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 15px;
+    padding: 0 15px;
+    transition: transform 0.5s ease;
+    will-change: transform;
+}
+
+.carousel-item {
+    flex: 0 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 12px;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-item:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.carousel-title {
+    font-size: 0.7rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .carousel-item {
+        flex: 0 0 100px;
+    }
+
+    .carousel-icon {
+        width: 80px;
+        height: 80px;
+    }
 }
