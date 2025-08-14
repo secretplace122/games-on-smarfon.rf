@@ -1,74 +1,101 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Элементы
+    // Основные элементы
     const gamesGrid = document.getElementById("gamesGrid");
     const filterButtons = document.querySelectorAll(".filter-button");
     const searchInput = document.querySelector(".search-input");
     const menuToggle = document.querySelector(".menu-toggle");
     const nav = document.querySelector(".nav");
 
-    // Мобильное меню
-    menuToggle.addEventListener("click", () => {
-        nav.classList.toggle("active");
-        document.body.style.overflow = nav.classList.contains("active") ? "hidden" : "";
-    });
-
     // Фильтрация игр
     function filterGames(filter) {
-        const allCards = gamesGrid.querySelectorAll(".game-item");
+        const allCards = gamesGrid.querySelectorAll(".game-card");
         const filterLower = filter.toLowerCase();
         
         allCards.forEach(card => {
-            const badgeEl = card.querySelector(".game-badge");
+            const category = card.dataset.category || '';
             const matchesFilter = 
                 filterLower === "all" || 
-                (filterLower === "popular" && badgeEl?.classList.contains("popular")) ||
-                (filterLower === "new" && badgeEl?.classList.contains("new")) ||
-                (filterLower === "top100" && badgeEl?.classList.contains("top100"));
+                (filterLower === "popular" && category.includes("popular")) ||
+                (filterLower === "new" && category.includes("new")) ||
+                (filterLower === "top100" && category.includes("top100"));
             
-            card.style.display = matchesFilter ? "block" : "none";
+            card.classList.toggle("hidden", !matchesFilter);
         });
     }
 
     // Поиск игр
-    function searchGames(query) {
-        const q = query.trim().toLowerCase();
-        
-        if (!q) {
-            filterGames("all");
-            return;
-        }
-
-        const allCards = gamesGrid.querySelectorAll(".game-item");
-        let hasResults = false;
-        
+function searchGames(query) {
+    const q = query.trim().toLowerCase();
+    const allCards = gamesGrid.querySelectorAll(".game-card");
+    
+    if (!q) {
+        // При очистке поиска показываем все карточки и применяем активный фильтр
         allCards.forEach(card => {
-            const isMatch = card.dataset.title.toLowerCase().includes(q);
-            card.style.display = isMatch ? "block" : "none";
-            if (isMatch) hasResults = true;
+            card.classList.remove("search-hidden");
         });
+        document.getElementById('noResults')?.remove();
+        
+        // Применяем текущий активный фильтр
+        const activeFilter = document.querySelector('.filter-button.active')?.dataset.filter || 'all';
+        filterGames(activeFilter);
+        return;
     }
 
-    // Обработчики
+    let hasResults = false;
+    allCards.forEach(card => {
+        const title = card.dataset.title.toLowerCase();
+        const isMatch = title.includes(q);
+        
+        if (isMatch) {
+            card.classList.remove("search-hidden");
+            card.classList.remove("hidden");
+            hasResults = true;
+        } else {
+            card.classList.add("search-hidden");
+        }
+    });
+
+    // Уведомление, если нет результатов
+    document.getElementById('noResults')?.remove();
+    if (!hasResults) {
+        const message = document.createElement('div');
+        message.id = 'noResults';
+        message.textContent = 'Игры не найдены. Попробуйте другой запрос.';
+        message.style.textAlign = 'center';
+        message.style.padding = '20px';
+        message.style.color = 'var(--text-light)';
+        gamesGrid.appendChild(message);
+    }
+}
+
+    // Обработчики событий
     filterButtons.forEach(button => {
-        button.addEventListener("click", (e) => {
+        button.addEventListener("click", e => {
             e.preventDefault();
             filterButtons.forEach(btn => btn.classList.remove("active"));
             button.classList.add("active");
+            searchInput.value = "";
             filterGames(button.dataset.filter);
             nav.classList.remove("active");
         });
     });
 
-    searchInput.addEventListener("input", (e) => {
-        const query = e.target.value;
+    searchInput.addEventListener("input", e => {
+    const query = e.target.value;
+    searchGames(query);
+    
+    // Снимаем активность с фильтров при поиске
+    if (query) {
         filterButtons.forEach(btn => btn.classList.remove("active"));
-        
-        if (!query) {
-            document.querySelector('.filter-button[data-filter="all"]').classList.add("active");
-            filterGames("all");
-        } else {
-            searchGames(query);
-        }
+    } else {
+        // Возвращаем активность фильтру "Все" при очистке поиска
+        document.querySelector('.filter-button[data-filter="all"]').classList.add("active");
+    }
+});
+
+    menuToggle.addEventListener("click", () => {
+        nav.classList.toggle("active");
+        document.body.style.overflow = nav.classList.contains("active") ? "hidden" : "";
     });
 
     // Закрытие меню при клике вне его
